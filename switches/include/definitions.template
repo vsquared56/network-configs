@@ -1,0 +1,91 @@
+{{~
+    acls = {
+        "acl_vlan100" : {
+            name: "acl_vlan100",
+            cidr: "172.20.100.0/24",
+            gateway: "172.20.100.1"
+        }, 
+        "acl_vlan49" : {
+            name: "acl_vlan49",
+            cidr: "172.20.49.0/24",
+            gateway: "172.20.49.1"
+        },
+        "acl_vlan51" : {
+            name: "acl_vlan51",
+            cidr: "172.20.51.0/24",
+            gateway: "172.20.51.1"
+        },
+        "acl_vlan55" : {
+            name: "acl_vlan55",
+            cidr: "172.20.55.0/24",
+            gateway: "172.20.55.1"
+        },
+        "acl_vlan67" : {
+            name: "acl_vlan67",
+            cidr: "172.20.67.0/24",
+            gateway: "172.20.67.1"
+        },
+        "acl_vlan80" : {
+            name: "acl_vlan80",
+            cidr: "172.20.80.0/24",
+            gateway: "172.20.80.1"
+        },
+        "acl_vlan84" : {
+            name: "acl_vlan84",
+            cidr: "172.20.84.0/24",
+            gateway: "172.20.84.1"
+        },
+        "acl_vlan85" : {
+            name: "acl_vlan85",
+            cidr: "172.20.85.0/24",
+            gateway: "172.20.85.1"
+        },
+        "acl_vlan86" : {
+            name: "acl_vlan86",
+            cidr: "172.20.86.0/24",
+            gateway: "172.20.86.1"
+        }
+    }
+
+all_dcs = resolve_multiple_a("ad.rvtn.org")
+all_adcs_cas = resolve_multiple_a("rvtn-prime-ie1.ad.rvtn.org")
+all_wsus_servers = resolve_multiple_a("edna.ad.rvtn.org")
+all_metastorm_file_servers = [
+    resolve_a("metaman.ad.rvtn.org"),
+    resolve_a("stormicide.ad.rvtn.org"),
+    resolve_a("blazestone.ad.rvtn.org"),
+    resolve_a("blitzerman.ad.rvtn.org")
+]
+all_bulk_file_servers = [
+    resolve_a("downburst.ad.rvtn.org"),
+    resolve_a("macroburst.ad.rvtn.org")
+]
+all_utility_http_servers = [
+    resolve_a("metaman.ad.rvtn.org"),
+    resolve_a("stormicide.ad.rvtn.org"),
+    resolve_a("blazestone.ad.rvtn.org")
+]
+all_service_http_servers = [
+    resolve_a("psycwave.ad.rvtn.org"),
+    resolve_a("deavor.ad.rvtn.org")
+]
+all_radius_servers = [
+    resolve_a("hypershock.ad.rvtn.org"),
+    resolve_a("plasmabolt.ad.rvtn.org")
+]
+all_uyuni_servers = resolve_multiple_a("dicker.ad.rvtn.org")
+all_blueiris_servers = resolve_multiple_a("everseer.ad.rvtn.org")
+
+all_blueiris_ips = {
+        "acl_vlan67" : {
+            blue_iris: "172.20.67.69"
+        }
+}
+
+all_roon_core_ips = {
+        "acl_vlan49" : {
+            roon_core: "172.20.49.83"
+        }
+}
+
+~}}

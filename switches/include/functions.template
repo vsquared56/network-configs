@@ -1,0 +1,248 @@
+{{~
+
+func deny_other_local_access
+  " remark Deny all other internal traffic\r\n"
+  " deny ip any 172.16.0.0/12\r\n"
+end
+
+func allow_internet_access
+  deny_other_local_access
+  " remark Allow Internet access\r\n"
+  " permit ip any any\r\n"
+end
+
+func allow_established_tcp_sessions
+  for subnet in $.subnets
+    " remark Allow established TCP sessions\r\n"
+    " permit tcp " + $.acl.cidr + " " + subnet + " established\r\n"
+  end
+end
+
+func allow_local_icmp_to_gateway
+    " remark Allow ping to local gateway\r\n"
+    " permit icmp " + $.acl.cidr + " host " + $.acl.gateway + " echo\r\n"
+end
+
+func allow_local_icmp_to_subnet
+    " remark Allow ping to local subnet\r\n"
+    " permit icmp " + $.acl.cidr + " " + $.acl.cidr + " echo\r\n"
+end
+
+func allow_local_icmp_replies
+    " remark Allow local ICMP replies\r\n"
+    " permit icmp " + $.acl.cidr + " 172.16.0.0/16 echo-reply\r\n"
+    " remark Allow local ICMP replies\r\n"
+    " permit icmp " + $.acl.cidr + " 172.20.0.0/16 echo-reply\r\n"
+end
+
+func allow_ad_dns_queries
+  for dc in all_dcs
+    " remark Allow DNS lookups using local DNS servers\r\n"
+    " permit udp " + $.acl.cidr + " host " + dc + " eq dns\r\n"
+  end
+end
+
+func allow_bulk_fileserver_access
+  for fs in all_bulk_file_servers
+    " remark Allow SMB access to bulk file servers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + fs + " eq microsoft-ds\r\n"
+  end
+end
+
+func allow_utility_http_access
+  for server in all_utility_http_servers
+    " remark Allow HTTP access to utility servers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + server + " eq http\r\n"
+    " remark Allow HTTPS access to utility servers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + server + " eq ssl\r\n"
+  end
+end
+
+func allow_service_http_access
+  for server in all_service_http_servers
+    " remark Allow HTTP access to internal services\r\n"
+    " permit tcp " + $.acl.cidr + " host " + server + " eq http\r\n"
+    " remark Allow HTTPS access to internal services\r\n"
+    " permit tcp " + $.acl.cidr + " host " + server + " eq ssl\r\n"
+  end
+end
+
+func allow_blueiris_http_access
+  for server in all_blueiris_servers
+    " remark Allow Blue Iris Browser Access\r\n"
+    " permit tcp " + $.acl.cidr + " host " + server + " eq http\r\n"
+    " remark Allow Blue Iris Browser Access\r\n"
+    " permit tcp " + $.acl.cidr + " host " + server + " eq ssl\r\n"
+  end
+end
+
+func allow_blueiris_camera_access
+  #Blue Iris should have an interface in each subnet with cameras, this subnet's IP can be found in all_blueiris_ips
+  blue_iris = all_blueiris_ips[$.acl.name].blue_iris
+  " remark IP Camera HTTP Access\r\n"
+  " permit tcp host " + blue_iris + " " + $.acl.cidr + " eq http\r\n"
+  " remark IP Camera HTTPS Access\r\n"
+  " permit tcp host " + blue_iris + " " + $.acl.cidr + " eq ssl\r\n"
+  " remark IP Camera RTSP Access\r\n"
+  " permit tcp host " + blue_iris + " " + $.acl.cidr + " eq rtsp\r\n"
+  " remark IP Camera TCP Access\r\n"
+  " permit tcp host " + blue_iris + " " + $.acl.cidr + " eq 37777\r\n"
+end
+
+func allow_connections_from_roon_core
+  #Roon cores should have an interface in each subnet, this subnet's IP can be found in all_roon_core_ips
+  roon_core = all_roon_core_ips[$.acl.name].roon_core
+  " remark Allow TCP from Roon Core\r\n"
+  " permit tcp host " + roon_core + " " + $.acl.cidr + " eq 9200\r\n"
+  " remark Allow UDP from Roon Core\r\n"
+  " permit udp host " + roon_core + " range 9001 9003 " + $.acl.cidr + "\r\n"
+  " remark Allow TCP from Roon Core for RAAT\r\n"
+  " permit tcp host " + roon_core + " range 32768 65535 " + $.acl.cidr + " range 32768 65535\r\n"
+  " remark Allow UDP from Roon Core for RAAT\r\n"
+  " permit udp host " + roon_core + " range 32768 65535 " + $.acl.cidr + " range 32768 65535\r\n"
+end
+
+func allow_connections_to_roon_core
+  #Roon cores should have an interface in each subnet, this subnet's IP can be found in all_roon_core_ips
+  roon_core = all_roon_core_ips[$.acl.name].roon_core
+  " remark Allow TCP to Roon Core\r\n"
+  " permit tcp " + $.acl.cidr + " host " + roon_core + " range 9330 9339\r\n"
+  " remark Allow TCP to Roon Core\r\n"
+  " permit tcp " + $.acl.cidr + " host " + roon_core + " range 30000 30010\r\n"
+  " remark Allow UDP to Roon Core\r\n"
+  " permit udp " + $.acl.cidr + " host " + roon_core + " range 9001 9003\r\n"
+  " remark Allow TCP to Roon Core for RAAT\r\n"
+  " permit tcp " + $.acl.cidr + " range 32768 65535 host " + roon_core + " range 32768 65535\r\n"
+  " remark Allow UDP to Roon Core for RAAT\r\n"
+  " permit udp " + $.acl.cidr + " range 32768 65535 host " + roon_core + " range 32768 65535\r\n"
+end
+
+func allow_uyuni_access
+  for server in all_uyuni_servers
+    " remark Allow HTTP access to Uyuni web resources\r\n"
+    " permit tcp " + $.acl.cidr + " host " + server + " eq http\r\n"
+    " remark Allow HTTPS access to Uyuni web resources\r\n"
+    " permit tcp " + $.acl.cidr + " host " + server + " eq ssl\r\n"
+    " remark Allow access to Uyuni salt\r\n"
+    " permit tcp " + $.acl.cidr + " host " + server + " eq 4505\r\n"
+    " remark Allow access to Uyuni salt\r\n"
+    " permit tcp " + $.acl.cidr + " host " + server + " eq 4506\r\n"
+  end
+end
+
+func allow_rdp_to_management_network
+  " remark Allow RDP to Management Subnet\r\n"
+  " permit tcp " + $.acl.cidr + " 172.16.43.0/24 eq 3389\r\n"
+  " remark Allow RDP to Management Subnet\r\n"
+  " permit udp " + $.acl.cidr + " 172.16.43.0/24 eq 3389\r\n"
+  " remark Allow ping to Management Subnet\r\n"
+  " permit icmp " + $.acl.cidr + " 172.16.43.0/24 echo\r\n"
+  " remark Allow RDP to Management Subnet\r\n"
+  " permit tcp " + $.acl.cidr + " 172.20.43.0/24 eq 3389\r\n"
+  " remark Allow RDP to Management Subnet\r\n"
+  " permit udp " + $.acl.cidr + " 172.20.43.0/24 eq 3389\r\n"
+  " remark Allow ping to Management Subnet\r\n"
+  " permit icmp " + $.acl.cidr + " 172.20.43.0/24 echo\r\n"
+end
+
+func allow_radius_requests
+  for server in all_radius_servers
+    " remark Allow RADIUS requests\r\n"
+    " permit udp " + $.acl.cidr + " host " + server + " range radius 1813\r\n"
+    " remark Allow ping to RADIUS servers\r\n"
+    " permit icmp " + $.acl.cidr + " host " + server + " echo\r\n"
+    " remark Temp -- allow all traffic to RADIUS server\r\n"
+    " permit ip " + $.acl.cidr + " host " + server + "\r\n"
+  end
+end
+
+func allow_iot_access
+  " remark Allow IOT Device Access\r\n"
+  " permit tcp " + $.acl.cidr + " 172.20.84.0/24 eq http\r\n"
+  " remark Allow IOT Device Access\r\n"
+  " permit tcp " + $.acl.cidr + " 172.20.84.0/24 eq ssl\r\n"
+  " remark Allow IOT Device Access\r\n"
+  " permit icmp " + $.acl.cidr + " 172.20.84.0/24 echo\r\n"
+end
+
+func allow_minecraft_access
+  " remark Allow Minecraft connections to underminer\r\n"
+  " permit tcp " + $.acl.cidr + " host " + resolve_a("underminer.ad.rvtn.org") + " eq 25565\r\n"
+end
+
+func allow_dev_network_access
+  " remark Allow Dev Network Access (RDP)\r\n"
+  " permit tcp " + $.acl.cidr + " 172.20.100.0/24 eq 3389\r\n"
+  " remark Allow Dev Network Access (ssh)\r\n"
+  " permit tcp " + $.acl.cidr + " 172.20.100.0/24 eq ssh\r\n"
+  " remark Allow Dev Network Access (web)\r\n"
+  " permit tcp " + $.acl.cidr + " 172.20.100.0/24 eq 8080\r\n"
+  " remark Allow IOT Device Access (ping)\r\n"
+  " permit icmp " + $.acl.cidr + " 172.20.100.0/24 echo\r\n"
+end
+
+func allow_dhcp_requests
+  " remark Allow DHCP Requests\r\n"
+  " permit udp host 0.0.0.0 eq bootpc host 255.255.255.255 eq bootps\r\n"
+end
+
+func allow_ad
+  for dc in all_dcs
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit udp " + $.acl.cidr + " host " + dc + " eq dns\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + dc + " eq kerberos\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit udp " + $.acl.cidr + " host " + dc + " eq kerberos\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit udp " + $.acl.cidr + " host " + dc + " eq ntp\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + dc + " eq loc-srv\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + dc + " eq ldap\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit udp " + $.acl.cidr + " host " + dc + " eq ldap\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + dc + " eq microsoft-ds\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + dc + " eq kpasswd\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit udp " + $.acl.cidr + " host " + dc + " eq kpasswd\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + dc + " eq ldaps\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit udp " + $.acl.cidr + " host " + dc + " eq kerberos-adm\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + dc + " eq 3268\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + dc + " eq 3269\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit tcp " + $.acl.cidr + " host " + dc + " range 49152 65535\r\n"
+    " remark Active Directory Clients to Domain Controllers\r\n"
+    " permit udp " + $.acl.cidr + " host " + dc + " range 49152 65535\r\n"
+  end
+  for server in all_wsus_servers
+    " remark Allow WSUS Access\r\n"
+    " permit tcp " + $.acl.cidr + " host " + server + " range 8530 8531\r\n"
+  end
+  for fs in all_metastorm_file_servers
+    " remark SMB Access to Metastorm\r\n"
+    " permit tcp " + $.acl.cidr + " host " + fs + " eq microsoft-ds\r\n"
+  end
+  for ca in all_adcs_cas
+    " remark Active Directory Certificate Services\r\n"
+    " permit tcp " + $.acl.cidr + " host " + ca + " eq loc-srv\r\n"
+    " remark Active Directory Certificate Services\r\n"
+    " permit tcp " + $.acl.cidr + " host " + ca + " range 49152 65535\r\n"
+    " remark Active Directory Certificate Services\r\n"
+    " permit udp " + $.acl.cidr + " host " + ca + " range 49152 65535\r\n"
+  end
+  allow_utility_http_access acl: acl
+end
+
+func allow_urbackup_replies
+  " remark URbackup UDP replies (discovery)\r\n"
+  " permit udp " + $.acl.cidr + " eq 35622 host " + resolve_a("frozone-20.ad.rvtn.org") + "\r\n"
+end
+
+~}}
