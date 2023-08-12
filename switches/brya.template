@@ -4,16 +4,17 @@ include `include\definitions.template`
 include `include\functions.template`
 
 ~}}
-{{~ acl = acls.acl_vlan100 ~}}
-ip access-list extended {{ acl.name }}
- {{~ allow_ad acl: acl ~}}
- {{~ allow_bulk_fileserver_access acl: acl ~}}
- {{~ allow_service_http_access acl: acl ~}}
- {{~ allow_uyuni_access acl: acl ~}}
- {{~ allow_urbackup_replies acl: acl ~}}
- {{~ allow_local_icmp_to_gateway acl: acl ~}}
- {{~ allow_local_icmp_replies acl: acl ~}}
- {{~ allow_established_tcp_sessions acl: acl subnets: [
+{{~ site = sites.site20 ~}}
+{{~ subnet = subnets.vlan20_100 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad subnet: subnet ~}}
+ {{~ allow_bulk_fileserver_access subnet: subnet ~}}
+ {{~ allow_service_http_access subnet: subnet ~}}
+ {{~ allow_uyuni_access subnet: subnet ~}}
+ {{~ allow_urbackup_replies subnet: subnet ~}}
+ {{~ allow_local_icmp_to_gateway subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
         "172.16.43.0/24",
         "172.20.1.0/24",
         "172.20.43.0/24",
@@ -23,25 +24,25 @@ ip access-list extended {{ acl.name }}
         "172.20.100.0/24"
       ]
  ~}}
- {{~ allow_internet_access acl: acl ~}}
+ {{~ allow_internet_access subnet: subnet ~}}
 !
-{{~ acl = acls.acl_vlan49 ~}}
-ip access-list extended {{ acl.name }}
- {{~ allow_ad acl: acl ~}}
- {{~ allow_bulk_fileserver_access acl: acl ~}}
- {{~ allow_service_http_access acl: acl ~}}
- {{~ allow_rdp_to_management_network acl: acl ~}}
- {{~ allow_iot_access acl: acl ~}}
- {{~ allow_dev_network_access acl: acl ~}}
- {{~ allow_blueiris_http_access acl: acl ~}}
- {{~ allow_minecraft_access acl: acl ~}}
- {{~ allow_dhcp_requests acl: acl ~}}
- {{~ allow_urbackup_replies acl: acl ~}}
- {{~ allow_connections_to_roon_core acl: acl ~}}
- {{~ allow_connections_from_roon_core acl: acl ~}}
- {{~ allow_local_icmp_to_subnet acl: acl ~}}
- {{~ allow_local_icmp_replies acl: acl ~}}
- {{~ allow_established_tcp_sessions acl: acl subnets: [
+{{~ subnet = subnets.vlan20_49 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad subnet: subnet ~}}
+ {{~ allow_bulk_fileserver_access subnet: subnet ~}}
+ {{~ allow_service_http_access subnet: subnet ~}}
+ {{~ allow_rdp_to_management_network subnet: subnet ~}}
+ {{~ allow_iot_access subnet: subnet ~}}
+ {{~ allow_dev_network_access subnet: subnet ~}}
+ {{~ allow_blueiris_http_access subnet: subnet ~}}
+ {{~ allow_minecraft_access subnet: subnet ~}}
+ {{~ allow_dhcp_requests subnet: subnet ~}}
+ {{~ allow_urbackup_replies subnet: subnet ~}}
+ {{~ allow_connections_to_roon_core subnet: subnet ~}}
+ {{~ allow_connections_from_roon_core subnet: subnet ~}}
+ {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
         "172.16.43.0/24",
         "172.20.1.0/24",
         "172.20.43.0/24",
@@ -49,39 +50,39 @@ ip access-list extended {{ acl.name }}
         "172.20.71.0/24"
       ]
  ~}}
- {{~ allow_internet_access acl: acl ~}}
+ {{~ allow_internet_access subnet: subnet ~}}
 !
-{{~ acl = acls.acl_vlan51 ~}}
-ip access-list extended {{ acl.name }}
- {{~ allow_ad acl: acl ~}}
- {{~ allow_bulk_fileserver_access acl: acl ~}}
- {{~ allow_service_http_access acl: acl ~}}
- {{~ allow_rdp_to_management_network acl: acl ~}}
- {{~ allow_iot_access acl: acl ~}}
- {{~ allow_dev_network_access acl: acl ~}}
- {{~ allow_blueiris_http_access acl: acl ~}}
- {{~ allow_minecraft_access acl: acl ~}}
- {{~ allow_dhcp_requests acl: acl ~}}
- {{~ allow_urbackup_replies acl: acl ~}}
- {{~ allow_local_icmp_to_subnet acl: acl ~}}
- {{~ allow_local_icmp_replies acl: acl ~}}
- {{~ allow_established_tcp_sessions acl: acl subnets: [
+{{~ subnet = subnets.vlan20_51 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad subnet: subnet ~}}
+ {{~ allow_bulk_fileserver_access subnet: subnet ~}}
+ {{~ allow_service_http_access subnet: subnet ~}}
+ {{~ allow_rdp_to_management_network subnet: subnet ~}}
+ {{~ allow_iot_access subnet: subnet ~}}
+ {{~ allow_dev_network_access subnet: subnet ~}}
+ {{~ allow_blueiris_http_access subnet: subnet ~}}
+ {{~ allow_minecraft_access subnet: subnet ~}}
+ {{~ allow_dhcp_requests subnet: subnet ~}}
+ {{~ allow_urbackup_replies subnet: subnet ~}}
+ {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
         "172.16.43.0/24",
         "172.20.1.0/24",
         "172.20.43.0/24",
         "172.20.51.0/24"
       ]
  ~}}
- {{~ allow_internet_access acl: acl ~}}
+ {{~ allow_internet_access subnet: subnet ~}}
 !
-{{~ acl = acls.acl_vlan55 ~}}
-ip access-list extended {{ acl.name }}
- {{~ allow_ad acl: acl ~}}
- {{~ allow_dhcp_requests acl: acl ~}}
- {{~ allow_urbackup_replies acl: acl ~}}
- {{~ allow_local_icmp_to_gateway acl: acl ~}}
- {{~ allow_local_icmp_replies acl: acl ~}}
- {{~ allow_established_tcp_sessions acl: acl subnets: [
+{{~ subnet = subnets.vlan20_55 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad subnet: subnet ~}}
+ {{~ allow_dhcp_requests subnet: subnet ~}}
+ {{~ allow_urbackup_replies subnet: subnet ~}}
+ {{~ allow_local_icmp_to_gateway subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
         "172.16.43.0/24",
         "172.20.1.0/24",
         "172.20.43.0/24",
@@ -89,14 +90,14 @@ ip access-list extended {{ acl.name }}
       ]
  ~}}
 !
-{{~ acl = acls.acl_vlan67 ~}}
-ip access-list extended {{ acl.name }}
- {{~ allow_ad_dns_queries acl: acl ~}}
- {{~ allow_blueiris_camera_access acl: acl ~}}
- {{~ allow_dhcp_requests acl: acl ~}}
- {{~ allow_local_icmp_to_subnet acl: acl ~}}
- {{~ allow_local_icmp_replies acl: acl ~}}
- {{~ allow_established_tcp_sessions acl: acl subnets: [
+{{~ subnet = subnets.vlan20_67 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad_dns_queries subnet: subnet ~}}
+ {{~ allow_blueiris_camera_access subnet: subnet ~}}
+ {{~ allow_dhcp_requests subnet: subnet ~}}
+ {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
         "172.16.43.0/24",
         "172.16.71.0/24",
         "172.20.1.0/24",
@@ -106,16 +107,38 @@ ip access-list extended {{ acl.name }}
       ]
  ~}}
 !
-{{~ acl = acls.acl_vlan80 ~}}
-ip access-list extended {{ acl.name }}
- {{~ allow_ad acl: acl ~}}
- {{~ allow_service_http_access acl: acl ~}}
- {{~ allow_uyuni_access acl: acl ~}}
+{{~ subnet = subnets.vlan20_71 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad subnet: subnet ~}}
+ {{~ allow_bulk_fileserver_access subnet: subnet ~}}
+ {{~ allow_service_http_access subnet: subnet ~}}
+ {{~ allow_ntp_from_site_dcs_to_firewall site: site ~}}
+ {{~ allow_dns_from_site_dcs site: site ~}}
+ {{~ allow_dns_replies_from_site_dcs site: site ~}}
+ {{~ allow_ad_replies_from_site_dcs_to_site site: site ~}}
+ {{~ allow_dfsr_replication_from_site site: site ~}}
+ {{~ allow_urbackup_replies subnet: subnet ~}}
+ {{~ allow_dhcp_replies_from_site_dhcp site: site ~}}
+ {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
+      "172.16.43.0/24",
+      "172.20.1.0/24",
+      "172.20.43.0/24",
+      "172.20.51.0/24"
+    ]
+ ~}}
+!
+{{~ subnet = subnets.vlan20_80 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad subnet: subnet ~}}
+ {{~ allow_service_http_access subnet: subnet ~}}
+ {{~ allow_uyuni_access subnet: subnet ~}}
  remark Allow Azure Devops access to SQL (deavor to sansweet)
  permit tcp host {{resolve_a("deavor.ad.rvtn.org")}} host {{resolve_a("sansweet.ad.rvtn.org")}} eq 1433
- {{~ allow_local_icmp_to_subnet acl: acl ~}}
- {{~ allow_local_icmp_replies acl: acl ~}}
- {{~ allow_established_tcp_sessions acl: acl subnets: [
+ {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
         "172.16.43.0/24",
         "172.16.49.0/24",
         "172.16.51.0/24",
@@ -128,17 +151,17 @@ ip access-list extended {{ acl.name }}
         "172.20.80.0/24"
       ]
  ~}}
- {{~ allow_internet_access acl: acl ~}}
+ {{~ allow_internet_access subnet: subnet ~}}
 !
-{{~ acl = acls.acl_vlan84 ~}}
-ip access-list extended {{ acl.name }}
- {{~ allow_ad_dns_queries acl: acl ~}}
- {{~ allow_dhcp_requests acl: acl ~}}
- {{~ allow_local_icmp_to_subnet acl: acl ~}}
- {{~ allow_local_icmp_replies acl: acl ~}}
+{{~ subnet = subnets.vlan20_84 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad_dns_queries subnet: subnet ~}}
+ {{~ allow_dhcp_requests subnet: subnet ~}}
+ {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
  remark Allow all intra-vlan IOT traffic
- permit ip {{ acl.cidr }} {{ acl.cidr }}
- {{~ allow_established_tcp_sessions acl: acl subnets: [
+ permit ip {{ subnet.cidr }} {{ subnet.cidr }}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
         "172.16.43.0/24",
         "172.20.1.0/24",
         "172.20.43.0/24",
@@ -147,18 +170,18 @@ ip access-list extended {{ acl.name }}
         "172.20.84.0/24"
       ]
  ~}}
- {{~ allow_internet_access acl: acl ~}}
+ {{~ allow_internet_access subnet: subnet ~}}
 !
-{{~ acl = acls.acl_vlan85 ~}}
-ip access-list extended {{ acl.name }}
- {{~ allow_ad_dns_queries acl: acl ~}}
+{{~ subnet = subnets.vlan20_85 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad_dns_queries subnet: subnet ~}}
  remark Allow Ubiquti APs to Unifi Controller
- permit tcp {{ acl.cidr }} host 172.16.71.85 eq 8080
- {{~ allow_radius_requests acl: acl ~}}
- {{~ allow_dhcp_requests acl: acl ~}}
- {{~ allow_local_icmp_to_subnet acl: acl ~}}
- {{~ allow_local_icmp_replies acl: acl ~}}
- {{~ allow_established_tcp_sessions acl: acl subnets: [
+ permit tcp {{ subnet.cidr }} host 172.16.71.85 eq 8080
+ {{~ allow_radius_requests subnet: subnet ~}}
+ {{~ allow_dhcp_requests subnet: subnet ~}}
+ {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
         "172.16.43.0/24",
         "172.16.71.0/24",
         "172.20.1.0/24",
@@ -167,16 +190,16 @@ ip access-list extended {{ acl.name }}
       ]
  ~}}
 !
-{{~ acl = acls.acl_vlan86 ~}}
-ip access-list extended {{ acl.name }}
- {{~ allow_ad_dns_queries acl: acl ~}}
- {{~ allow_dhcp_requests acl: acl ~}}
- {{~ allow_local_icmp_to_subnet acl: acl ~}}
- {{~ allow_local_icmp_replies acl: acl ~}}
- {{~ allow_established_tcp_sessions acl: acl subnets: [
+{{~ subnet = subnets.vlan20_86 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad_dns_queries subnet: subnet ~}}
+ {{~ allow_dhcp_requests subnet: subnet ~}}
+ {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
         "172.20.1.0/24",
         "172.20.71.0/24"
       ]
  ~}}
- {{~ deny_other_local_access acl: acl ~}}
+ {{~ deny_other_local_access subnet: subnet ~}}
 !

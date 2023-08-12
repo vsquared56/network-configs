@@ -1,53 +1,190 @@
 {{~
-    acls = {
-        "acl_vlan100" : {
-            name: "acl_vlan100",
+    subnets = {
+        "vlan16_43" : {
+            acl_name: "acl_vlan43",
+            cidr: "172.16.43.0/24",
+            gateway: "172.16.43.1",
+            site: "site16",
+            internal_dns_access: true,
+            internal_ad_access: true
+        },
+        "vlan16_49" : {
+            acl_name: "acl_vlan49",
+            cidr: "172.16.49.0/24",
+            gateway: "172.16.49.1",
+            site: "site16",
+            internal_dns_access: true,
+            internal_ad_access: true
+        },
+        "vlan16_51" : {
+            acl_name: "acl_vlan51",
+            cidr: "172.16.51.0/24",
+            gateway: "172.16.51.1",
+            site: "site16",
+            internal_dns_access: true,
+            internal_ad_access: true
+        },
+        "vlan16_55" : {
+            acl_name: "acl_vlan55",
+            cidr: "172.16.55.0/24",
+            gateway: "172.16.55.1",
+            site: "site16",
+            internal_dns_access: true,
+            internal_ad_access: true
+        },
+        "vlan16_64" : {
+            acl_name: "acl_vlan64",
+            cidr: "172.16.64.0/24",
+            gateway: "172.16.64.1",
+            site: "site16",
+            internal_dns_access: true,
+            internal_ad_access: true
+        },
+        "vlan16_71" : {
+            acl_name: "acl_vlan71",
+            cidr: "172.16.71.0/24",
+            gateway: "172.16.71.1",
+            site: "site16",
+            internal_dns_access: true,
+            internal_ad_access: true
+        },
+        "vlan16_73" : {
+            acl_name: "acl_vlan73",
+            cidr: "172.16.73.0/24",
+            gateway: "172.16.73.1",
+            site: "site16",
+            internal_dns_access: true,
+            internal_ad_access: true
+        },
+        "vlan20_100" : {
+            acl_name: "acl_vlan100",
             cidr: "172.20.100.0/24",
-            gateway: "172.20.100.1"
-        }, 
-        "acl_vlan49" : {
-            name: "acl_vlan49",
+            gateway: "172.20.100.1",
+            site: "site20",
+            internal_dns_access: true,
+            internal_ad_access: true
+        },
+        "vlan20_43" : {
+            acl_name: "acl_vlan43",
+            cidr: "172.20.43.0/24",
+            gateway: "172.20.43.1",
+            site: "site20",
+            internal_dns_access: true,
+            internal_ad_access: true
+        },
+        "vlan20_49" : {
+            acl_name: "acl_vlan49",
             cidr: "172.20.49.0/24",
-            gateway: "172.20.49.1"
+            gateway: "172.20.49.1",
+            site: "site20",
+            internal_dns_access: true,
+            internal_ad_access: true
         },
-        "acl_vlan51" : {
-            name: "acl_vlan51",
+        "vlan20_51" : {
+            acl_name: "acl_vlan51",
             cidr: "172.20.51.0/24",
-            gateway: "172.20.51.1"
+            gateway: "172.20.51.1",
+            site: "site20",
+            internal_dns_access: true,
+            internal_ad_access: true
         },
-        "acl_vlan55" : {
-            name: "acl_vlan55",
+        "vlan20_55" : {
+            acl_name: "acl_vlan55",
             cidr: "172.20.55.0/24",
-            gateway: "172.20.55.1"
+            gateway: "172.20.55.1",
+            site: "site20",
+            internal_dns_access: true,
+            internal_ad_access: true
         },
-        "acl_vlan67" : {
-            name: "acl_vlan67",
+        "vlan20_64" : {
+            acl_name: "acl_vlan64",
+            cidr: "172.20.64.0/24",
+            gateway: "172.20.64.1",
+            site: "site20",
+            internal_dns_access: true,
+            internal_ad_access: true
+        },
+        "vlan20_67" : {
+            acl_name: "acl_vlan67",
             cidr: "172.20.67.0/24",
-            gateway: "172.20.67.1"
+            gateway: "172.20.67.1",
+            site: "site20",
+            internal_dns_access: true,
+            internal_ad_access: false
         },
-        "acl_vlan80" : {
-            name: "acl_vlan80",
+        "vlan20_71" : {
+            acl_name: "acl_vlan71",
+            cidr: "172.20.71.0/24",
+            gateway: "172.20.71.1",
+            site: "site20",
+            internal_dns_access: true,
+            internal_ad_access: true
+        },
+        "vlan20_80" : {
+            acl_name: "acl_vlan80",
             cidr: "172.20.80.0/24",
-            gateway: "172.20.80.1"
+            gateway: "172.20.80.1",
+            site: "site20",
+            internal_dns_access: true,
+            internal_ad_access: true
         },
-        "acl_vlan84" : {
-            name: "acl_vlan84",
+        "vlan20_84" : {
+            acl_name: "acl_vlan84",
             cidr: "172.20.84.0/24",
-            gateway: "172.20.84.1"
+            gateway: "172.20.84.1",
+            site: "site20",
+            internal_dns_access: true,
+            internal_ad_access: false
         },
-        "acl_vlan85" : {
-            name: "acl_vlan85",
+        "vlan20_85" : {
+            acl_name: "acl_vlan85",
             cidr: "172.20.85.0/24",
-            gateway: "172.20.85.1"
+            gateway: "172.20.85.1",
+            site: "site20",
+            internal_dns_access: true,
+            internal_ad_access: false
         },
-        "acl_vlan86" : {
-            name: "acl_vlan86",
+        "vlan20_86" : {
+            acl_name: "acl_vlan86",
             cidr: "172.20.86.0/24",
-            gateway: "172.20.86.1"
+            gateway: "172.20.86.1",
+            site: "site20",
+            internal_dns_access: false,
+            internal_ad_access: false
         }
     }
 
+sites = {
+        "site20" : {
+            name: "site20",
+            cidr: "172.20.0.0/16",
+            firewall: resolve_a("capsicum.rvtn.net")
+        }
+}
+
 all_dcs = resolve_multiple_a("ad.rvtn.org")
+all_dcs_by_site = {
+    "site16" : [
+        resolve_a("gazerbeam.ad.rvtn.org"),
+        resolve_a("phylange.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("apogee.ad.rvtn.org"),
+        resolve_a("gammajack.ad.rvtn.org")
+    ]
+}
+
+all_dhcp_servers_by_site = {
+    "site16" : [
+        resolve_a("dynaguy.ad.rvtn.org"),
+        resolve_a("thunderhead.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("splashdown.ad.rvtn.org"),
+        resolve_a("stratogale.ad.rvtn.org")
+    ]
+}
+
 all_adcs_cas = resolve_multiple_a("rvtn-prime-ie1.ad.rvtn.org")
 all_wsus_servers = resolve_multiple_a("edna.ad.rvtn.org")
 all_metastorm_file_servers = [
@@ -56,6 +193,16 @@ all_metastorm_file_servers = [
     resolve_a("blazestone.ad.rvtn.org"),
     resolve_a("blitzerman.ad.rvtn.org")
 ]
+all_metastorm_file_servers_by_site = {
+    "site16" : [
+        resolve_a("metaman.ad.rvtn.org"),
+        resolve_a("stormicide.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("blazestone.ad.rvtn.org"),
+        resolve_a("blitzerman.ad.rvtn.org")
+    ]
+}
 all_bulk_file_servers = [
     resolve_a("downburst.ad.rvtn.org"),
     resolve_a("macroburst.ad.rvtn.org")
