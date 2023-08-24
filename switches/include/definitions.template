@@ -155,6 +155,11 @@
     }
 
 sites = {
+        "site16" : {
+            name: "site16",
+            cidr: "172.16.0.0/16",
+            firewall: resolve_a("citrus.rvtn.net")
+        },
         "site20" : {
             name: "site20",
             cidr: "172.20.0.0/16",
@@ -162,8 +167,7 @@ sites = {
         }
 }
 
-all_dcs = resolve_multiple_a("ad.rvtn.org")
-all_dcs_by_site = {
+all_dcs = {
     "site16" : [
         resolve_a("gazerbeam.ad.rvtn.org"),
         resolve_a("phylange.ad.rvtn.org")
@@ -174,7 +178,7 @@ all_dcs_by_site = {
     ]
 }
 
-all_dhcp_servers_by_site = {
+all_dhcp_servers = {
     "site16" : [
         resolve_a("dynaguy.ad.rvtn.org"),
         resolve_a("thunderhead.ad.rvtn.org")
@@ -185,15 +189,21 @@ all_dhcp_servers_by_site = {
     ]
 }
 
-all_adcs_cas = resolve_multiple_a("rvtn-prime-ie1.ad.rvtn.org")
-all_wsus_servers = resolve_multiple_a("edna.ad.rvtn.org")
-all_metastorm_file_servers = [
-    resolve_a("metaman.ad.rvtn.org"),
-    resolve_a("stormicide.ad.rvtn.org"),
-    resolve_a("blazestone.ad.rvtn.org"),
-    resolve_a("blitzerman.ad.rvtn.org")
-]
-all_metastorm_file_servers_by_site = {
+all_adcs_cas = {
+    "site16" : [
+        resolve_a("rvtn-prime-ie1.ad.rvtn.org")
+    ],
+    "site20" : []
+}
+
+all_wsus_servers = {
+    "site16" : [
+        resolve_a("edna.ad.rvtn.org")
+    ],
+    "site20" : []
+}
+
+all_metastorm_file_servers = {
     "site16" : [
         resolve_a("metaman.ad.rvtn.org"),
         resolve_a("stormicide.ad.rvtn.org")
@@ -203,25 +213,57 @@ all_metastorm_file_servers_by_site = {
         resolve_a("blitzerman.ad.rvtn.org")
     ]
 }
-all_bulk_file_servers = [
-    resolve_a("downburst.ad.rvtn.org"),
-    resolve_a("macroburst.ad.rvtn.org")
-]
-all_utility_http_servers = [
-    resolve_a("metaman.ad.rvtn.org"),
-    resolve_a("stormicide.ad.rvtn.org"),
-    resolve_a("blazestone.ad.rvtn.org")
-]
-all_service_http_servers = [
-    resolve_a("psycwave.ad.rvtn.org"),
-    resolve_a("deavor.ad.rvtn.org")
-]
-all_radius_servers = [
-    resolve_a("hypershock.ad.rvtn.org"),
-    resolve_a("plasmabolt.ad.rvtn.org")
-]
-all_uyuni_servers = resolve_multiple_a("dicker.ad.rvtn.org")
-all_blueiris_servers = resolve_multiple_a("everseer.ad.rvtn.org")
+
+all_bulk_file_servers = {
+    "site16" : [
+        resolve_a("downburst.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("macroburst.ad.rvtn.org")
+    ]
+}
+
+all_utility_http_servers = {
+    "site16" : [
+        resolve_a("metaman.ad.rvtn.org"),
+        resolve_a("stormicide.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("blazestone.ad.rvtn.org")
+    ]
+}
+
+all_service_http_servers = {
+    "site16" : [
+        resolve_a("psycwave.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("deavor.ad.rvtn.org")
+    ]
+}
+
+all_radius_servers = {
+    "site16" : [
+        resolve_a("hypershock.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("plasmabolt.ad.rvtn.org")
+    ]
+}
+
+all_uyuni_servers = {
+    "site16" : [],
+    "site20" : [
+        resolve_a("dicker.ad.rvtn.org")
+    ]
+}
+
+all_blueiris_servers = {
+    "site16" : [],
+    "site20" : [
+        resolve_a("everseer.ad.rvtn.org")
+    ]
+}
 
 all_blueiris_ips = {
         "acl_vlan67" : {

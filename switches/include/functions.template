@@ -36,43 +36,53 @@ func allow_local_icmp_replies
 end
 
 func allow_ad_dns_queries
-  for dc in all_dcs
-    " remark Allow DNS lookups using local DNS servers\r\n"
-    " permit udp " + $.subnet.cidr + " host " + dc + " eq dns\r\n"
+  for site_dcs in all_dcs | object.values
+    for dc in site_dcs
+      " remark Allow DNS lookups using local DNS servers\r\n"
+      " permit udp " + $.subnet.cidr + " host " + dc + " eq dns\r\n"
+    end
   end
 end
 
 func allow_bulk_fileserver_access
-  for fs in all_bulk_file_servers
-    " remark Allow SMB access to bulk file servers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + fs + " eq microsoft-ds\r\n"
+  for site_servers in all_bulk_file_servers | object.values
+    for server in site_servers
+      " remark Allow SMB access to bulk file servers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq microsoft-ds\r\n"
+    end
   end
 end
 
 func allow_utility_http_access
-  for server in all_utility_http_servers
-    " remark Allow HTTP access to utility servers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + server + " eq http\r\n"
-    " remark Allow HTTPS access to utility servers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + server + " eq ssl\r\n"
+  for site_servers in all_utility_http_servers | object.values
+    for server in site_servers
+      " remark Allow HTTP access to utility servers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq http\r\n"
+      " remark Allow HTTPS access to utility servers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq ssl\r\n"
+    end
   end
 end
 
 func allow_service_http_access
-  for server in all_service_http_servers
-    " remark Allow HTTP access to internal services\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + server + " eq http\r\n"
-    " remark Allow HTTPS access to internal services\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + server + " eq ssl\r\n"
+  for site_servers in all_service_http_servers | object.values
+    for server in site_servers
+      " remark Allow HTTP access to internal services\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq http\r\n"
+      " remark Allow HTTPS access to internal services\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq ssl\r\n"
+    end
   end
 end
 
 func allow_blueiris_http_access
-  for server in all_blueiris_servers
-    " remark Allow Blue Iris Browser Access\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + server + " eq http\r\n"
-    " remark Allow Blue Iris Browser Access\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + server + " eq ssl\r\n"
+  for site_servers in all_blueiris_servers | object.values
+    for server in site_servers
+      " remark Allow Blue Iris Browser Access\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq http\r\n"
+      " remark Allow Blue Iris Browser Access\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq ssl\r\n"
+    end
   end
 end
 
@@ -118,15 +128,17 @@ func allow_connections_to_roon_core
 end
 
 func allow_uyuni_access
-  for server in all_uyuni_servers
-    " remark Allow HTTP access to Uyuni web resources\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + server + " eq http\r\n"
-    " remark Allow HTTPS access to Uyuni web resources\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + server + " eq ssl\r\n"
-    " remark Allow access to Uyuni salt\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + server + " eq 4505\r\n"
-    " remark Allow access to Uyuni salt\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + server + " eq 4506\r\n"
+  for site_servers in all_uyuni_servers | object.values
+    for server in site_servers
+      " remark Allow HTTP access to Uyuni web resources\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq http\r\n"
+      " remark Allow HTTPS access to Uyuni web resources\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq ssl\r\n"
+      " remark Allow access to Uyuni salt\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq 4505\r\n"
+      " remark Allow access to Uyuni salt\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq 4506\r\n"
+    end
   end
 end
 
@@ -146,13 +158,15 @@ func allow_rdp_to_management_network
 end
 
 func allow_radius_requests
-  for server in all_radius_servers
-    " remark Allow RADIUS requests\r\n"
-    " permit udp " + $.subnet.cidr + " host " + server + " range radius 1813\r\n"
-    " remark Allow ping to RADIUS servers\r\n"
-    " permit icmp " + $.subnet.cidr + " host " + server + " echo\r\n"
-    " remark Temp -- allow all traffic to RADIUS server\r\n"
-    " permit ip " + $.subnet.cidr + " host " + server + "\r\n"
+  for site_servers in all_radius_servers | object.values
+    for server in site_servers
+      " remark Allow RADIUS requests\r\n"
+      " permit udp " + $.subnet.cidr + " host " + server + " range radius 1813\r\n"
+      " remark Allow ping to RADIUS servers\r\n"
+      " permit icmp " + $.subnet.cidr + " host " + server + " echo\r\n"
+      " remark Temp -- allow all traffic to RADIUS server\r\n"
+      " permit ip " + $.subnet.cidr + " host " + server + "\r\n"
+    end
   end
 end
 
@@ -187,55 +201,63 @@ func allow_dhcp_requests
 end
 
 func allow_ad
-  for dc in all_dcs
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit udp " + $.subnet.cidr + " host " + dc + " eq dns\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + dc + " eq kerberos\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit udp " + $.subnet.cidr + " host " + dc + " eq kerberos\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit udp " + $.subnet.cidr + " host " + dc + " eq ntp\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + dc + " eq loc-srv\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + dc + " eq ldap\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit udp " + $.subnet.cidr + " host " + dc + " eq ldap\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + dc + " eq microsoft-ds\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + dc + " eq kpasswd\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit udp " + $.subnet.cidr + " host " + dc + " eq kpasswd\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + dc + " eq ldaps\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit udp " + $.subnet.cidr + " host " + dc + " eq kerberos-adm\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + dc + " eq 3268\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + dc + " eq 3269\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + dc + " range 49152 65535\r\n"
-    " remark Active Directory Clients to Domain Controllers\r\n"
-    " permit udp " + $.subnet.cidr + " host " + dc + " range 49152 65535\r\n"
+  for site_dcs in all_dcs | object.values
+    for dc in site_dcs
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit udp " + $.subnet.cidr + " host " + dc + " eq dns\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + dc + " eq kerberos\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit udp " + $.subnet.cidr + " host " + dc + " eq kerberos\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit udp " + $.subnet.cidr + " host " + dc + " eq ntp\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + dc + " eq loc-srv\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + dc + " eq ldap\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit udp " + $.subnet.cidr + " host " + dc + " eq ldap\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + dc + " eq microsoft-ds\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + dc + " eq kpasswd\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit udp " + $.subnet.cidr + " host " + dc + " eq kpasswd\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + dc + " eq ldaps\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit udp " + $.subnet.cidr + " host " + dc + " eq kerberos-adm\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + dc + " eq 3268\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + dc + " eq 3269\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + dc + " range 49152 65535\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit udp " + $.subnet.cidr + " host " + dc + " range 49152 65535\r\n"
+    end
   end
-  for server in all_wsus_servers
-    " remark Allow WSUS Access\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + server + " range 8530 8531\r\n"
+  for site_servers in all_wsus_servers | object.values
+    for server in site_servers
+      " remark Allow WSUS Access\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " range 8530 8531\r\n"
+    end
   end
-  for fs in all_metastorm_file_servers
-    " remark SMB Access to Metastorm\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + fs + " eq microsoft-ds\r\n"
+  for site_servers in all_metastorm_file_servers | object.values
+    for server in site_servers
+      " remark SMB Access to Metastorm\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq microsoft-ds\r\n"
+    end
   end
-  for ca in all_adcs_cas
-    " remark Active Directory Certificate Services\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + ca + " eq loc-srv\r\n"
-    " remark Active Directory Certificate Services\r\n"
-    " permit tcp " + $.subnet.cidr + " host " + ca + " range 49152 65535\r\n"
-    " remark Active Directory Certificate Services\r\n"
-    " permit udp " + $.subnet.cidr + " host " + ca + " range 49152 65535\r\n"
+  for site_servers in all_adcs_cas | object.values
+    for server in site_servers
+      " remark Active Directory Certificate Services\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq loc-srv\r\n"
+      " remark Active Directory Certificate Services\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " range 49152 65535\r\n"
+      " remark Active Directory Certificate Services\r\n"
+      " permit udp " + $.subnet.cidr + " host " + server + " range 49152 65535\r\n"
+    end
   end
   allow_utility_http_access subnet: $.subnet
 end
@@ -246,21 +268,21 @@ func allow_urbackup_replies
 end
 
 func allow_ntp_from_site_dcs_to_firewall
-  for dc in all_dcs_by_site[$.site.name]
+  for dc in all_dcs[$.site.name]
     " remark Allow NTP Queries from DC to firewall\r\n"
     " permit udp host " + dc + " host " + sites[$.site.name].firewall + " eq ntp\r\n"
   end
 end
 
 func allow_dhcp_replies_from_site_dhcp
-  for server in all_dhcp_servers_by_site[$.site.name]
+  for server in all_dhcp_servers[$.site.name]
     " remark remark Allow DHCP Replies\r\n"
     " permit udp host " + server + " eq bootps any eq bootps\r\n"
   end
 end
 
 func allow_dns_from_site_dcs
-  for dc in all_dcs_by_site[$.site.name]
+  for dc in all_dcs[$.site.name]
     " remark Allow DNS queries from DNS servers\r\n"
     " permit udp host " + dc + " any eq dns\r\n"
     " remark Allow DNS queries from DNS servers\r\n"
@@ -269,7 +291,7 @@ func allow_dns_from_site_dcs
 end
 
 func allow_dns_replies_from_site_dcs
-  for dc in all_dcs_by_site[$.site.name]
+  for dc in all_dcs[$.site.name]
     for subnet in subnets | object.values
       if subnet.internal_dns_access
         " remark Allow DNS responses\r\n"
@@ -280,7 +302,7 @@ func allow_dns_replies_from_site_dcs
 end
 
 func allow_ad_replies_from_site_dcs_to_site
-  for dc in all_dcs_by_site[$.site.name]
+  for dc in all_dcs[$.site.name]
     for subnet in subnets | object.values
       if subnet.site == $.site.name
         if subnet.internal_ad_access
@@ -299,8 +321,8 @@ func allow_ad_replies_from_site_dcs_to_site
 end
 
 func allow_dfsr_replication_from_site
-  for source_server in all_metastorm_file_servers_by_site[$.site.name]
-    for site_servers in all_metastorm_file_servers_by_site | object.values
+  for source_server in all_metastorm_file_servers[$.site.name]
+    for site_servers in all_metastorm_file_servers | object.values
       for destination_server in site_servers
         if destination_server != source_server
           " remark DFS Replication\r\n"
