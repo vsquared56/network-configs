@@ -6,7 +6,10 @@
             gateway: "172.16.43.1",
             site: "site16",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan16_49" : {
             acl_name: "acl_vlan49",
@@ -14,7 +17,10 @@
             gateway: "172.16.49.1",
             site: "site16",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan16_51" : {
             acl_name: "acl_vlan51",
@@ -22,7 +28,10 @@
             gateway: "172.16.51.1",
             site: "site16",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan16_55" : {
             acl_name: "acl_vlan55",
@@ -30,7 +39,10 @@
             gateway: "172.16.55.1",
             site: "site16",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan16_64" : {
             acl_name: "acl_vlan64",
@@ -38,7 +50,10 @@
             gateway: "172.16.64.1",
             site: "site16",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan16_71" : {
             acl_name: "acl_vlan71",
@@ -46,7 +61,10 @@
             gateway: "172.16.71.1",
             site: "site16",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: true
         },
         "vlan16_73" : {
             acl_name: "acl_vlan73",
@@ -54,7 +72,32 @@
             gateway: "172.16.73.1",
             site: "site16",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
+        },
+        "vlan16_80" : {
+            acl_name: "acl_vlan80",
+            cidr: "172.16.80.0/24",
+            gateway: "172.16.80.1",
+            site: "site16",
+            internal_dns_access: true,
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: true
+        },
+        "vlan16_85" : {
+            acl_name: "acl_vlan85",
+            cidr: "172.16.85.0/24",
+            gateway: "172.16.85.1",
+            site: "site16",
+            internal_dns_access: true,
+            internal_ad_access: false,
+            internal_radius_access: true,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan20_100" : {
             acl_name: "acl_vlan100",
@@ -62,7 +105,10 @@
             gateway: "172.20.100.1",
             site: "site20",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: true
         },
         "vlan20_43" : {
             acl_name: "acl_vlan43",
@@ -70,7 +116,10 @@
             gateway: "172.20.43.1",
             site: "site20",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: true,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan20_49" : {
             acl_name: "acl_vlan49",
@@ -78,7 +127,10 @@
             gateway: "172.20.49.1",
             site: "site20",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: true,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan20_51" : {
             acl_name: "acl_vlan51",
@@ -86,7 +138,10 @@
             gateway: "172.20.51.1",
             site: "site20",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan20_55" : {
             acl_name: "acl_vlan55",
@@ -94,7 +149,10 @@
             gateway: "172.20.55.1",
             site: "site20",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan20_64" : {
             acl_name: "acl_vlan64",
@@ -102,7 +160,10 @@
             gateway: "172.20.64.1",
             site: "site20",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: true,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan20_67" : {
             acl_name: "acl_vlan67",
@@ -110,7 +171,10 @@
             gateway: "172.20.67.1",
             site: "site20",
             internal_dns_access: true,
-            internal_ad_access: false
+            internal_ad_access: false,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan20_71" : {
             acl_name: "acl_vlan71",
@@ -118,7 +182,10 @@
             gateway: "172.20.71.1",
             site: "site20",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: true,
+            internal_uyuni_ssh_push_access: true
         },
         "vlan20_80" : {
             acl_name: "acl_vlan80",
@@ -126,7 +193,10 @@
             gateway: "172.20.80.1",
             site: "site20",
             internal_dns_access: true,
-            internal_ad_access: true
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: true
         },
         "vlan20_84" : {
             acl_name: "acl_vlan84",
@@ -134,7 +204,10 @@
             gateway: "172.20.84.1",
             site: "site20",
             internal_dns_access: true,
-            internal_ad_access: false
+            internal_ad_access: false,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan20_85" : {
             acl_name: "acl_vlan85",
@@ -142,7 +215,10 @@
             gateway: "172.20.85.1",
             site: "site20",
             internal_dns_access: true,
-            internal_ad_access: false
+            internal_ad_access: false,
+            internal_radius_access: true,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         },
         "vlan20_86" : {
             acl_name: "acl_vlan86",
@@ -150,7 +226,10 @@
             gateway: "172.20.86.1",
             site: "site20",
             internal_dns_access: false,
-            internal_ad_access: false
+            internal_ad_access: false,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         }
     }
 
@@ -233,6 +312,16 @@ all_utility_http_servers = {
     ]
 }
 
+all_utility_github_access_servers = {
+    "site16" : [
+        resolve_a("metaman.ad.rvtn.org"),
+        resolve_a("stormicide.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("blazestone.ad.rvtn.org")
+    ]
+}
+
 all_service_http_servers = {
     "site16" : [
         resolve_a("psycwave.ad.rvtn.org")
@@ -265,16 +354,32 @@ all_blueiris_servers = {
     ]
 }
 
+all_urbackup_servers = {
+    "site16" : [
+        resolve_a("frozone-16.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("frozone-20.ad.rvtn.org")
+    ]
+}
+
 all_blueiris_ips = {
-        "acl_vlan67" : {
-            blue_iris: "172.20.67.69"
-        }
+    "acl_vlan67" : {
+        blue_iris: "172.20.67.69"
+    }
 }
 
 all_roon_core_ips = {
-        "acl_vlan49" : {
-            roon_core: "172.20.49.83"
-        }
+    "acl_vlan49" : {
+        roon_core: "172.20.49.83"
+    }
 }
+
+all_github_subnets = [
+    "192.30.252.0/22",
+    "185.199.108.0/22",
+    "140.82.112.0/20",
+    "143.55.64.0/20"
+]
 
 ~}}

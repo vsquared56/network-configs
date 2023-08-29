@@ -40,6 +40,8 @@ func allow_ad_dns_queries
     for dc in site_dcs
       " remark Allow DNS lookups using local DNS servers\r\n"
       " permit udp " + $.subnet.cidr + " host " + dc + " eq dns\r\n"
+      " remark Allow DNS lookups using local DNS servers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + dc + " eq dns\r\n"
     end
   end
 end
@@ -301,6 +303,37 @@ func allow_dns_replies_from_site_dcs
   end
 end
 
+func allow_radius_replies_from_site_radius_servers
+  for server in all_radius_servers[$.site.name]
+    for subnet in subnets | object.values
+      if subnet.internal_radius_access
+        " remark Allow RADIUS replies\r\n"
+        " permit udp host " + server + " range radius 1813 " + subnet.cidr + "\r\n"
+      end
+    end
+  end
+end
+
+func allow_uyuni_ssh_push_access_from_site_uyuni_servers
+  for server in all_uyuni_servers[$.site.name]
+    for subnet in subnets | object.values
+      if subnet.internal_uyuni_ssh_push_access
+        " remark Allow Uyuni ssh push access\r\n"
+        " permit tcp host " + server + " " + subnet.cidr + " eq ssh\r\n"
+      end
+    end
+  end
+end
+
+func allow_github_access_from_site_github_servers
+  for server in all_utility_github_access_servers[$.site.name]
+    for subnet in all_github_subnets
+      " remark Allow Github access for PKI updater script\r\n"
+      " permit tcp host " + server + " " + subnet + "\r\n"
+    end
+  end
+end
+
 func allow_ad_replies_from_site_dcs_to_site
   for dc in all_dcs[$.site.name]
     for subnet in subnets | object.values
@@ -320,16 +353,44 @@ func allow_ad_replies_from_site_dcs_to_site
   end
 end
 
+func allow_urbackup_from_site_backup_servers_to_site
+  for server in all_urbackup_servers[$.site.name]
+    for subnet in subnets | object.values
+      if subnet.site == $.site.name
+        if subnet.internal_urbackup_access
+          " remark Urbackup server to clients (discovery)\r\n"
+          " permit udp host " + server + " " + subnet.cidr + " eq 35622\r\n"
+          " remark Urbackup server to clients (file transfer)\r\n"
+          " permit tcp host " + server + " " + subnet.cidr + " eq 35621\r\n"
+          " remark Urbackup server to clients (commands and image transfer)\r\n"
+          " permit tcp host " + server + " " + subnet.cidr + " eq 35623\r\n"
+        end
+      end
+    end
+  end
+end
+
 func allow_dfsr_replication_from_site
   for source_server in all_metastorm_file_servers[$.site.name]
-    for site_servers in all_metastorm_file_servers | object.values
-      for destination_server in site_servers
+    for all_servers in all_metastorm_file_servers | object.values
+      for destination_server in all_servers
         if destination_server != source_server
           " remark DFS Replication\r\n"
           " permit tcp host " + source_server + " host " + destination_server + " eq loc-srv\r\n"
           " remark DFS Replication\r\n"
           " permit tcp host " + source_server + " host " + destination_server + " eq 55555\r\n"
         end
+      end
+    end
+  end
+end
+
+func allow_dhcp_failover_within_site
+  for source_server in all_dhcp_servers[$.site.name]
+    for destination_server in all_dhcp_servers[$.site.name]
+      if destination_server != source_server
+        " remark DHCP Failover Between DHCP Servers\r\n"
+        " permit tcp host " + source_server + " host " + destination_server + " eq dhcp-failover\r\n"
       end
     end
   end
