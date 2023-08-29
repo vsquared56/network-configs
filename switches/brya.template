@@ -90,6 +90,26 @@ ip access-list extended {{ subnet.acl_name }}
       ]
  ~}}
 !
+{{~ subnet = subnets.vlan20_64 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad subnet: subnet ~}}
+ {{~ allow_urbackup_replies subnet: subnet ~}}
+ {{~ allow_hyperv_to_management_subnets subnet: subnet ~}}
+ {{~ allow_hyperv_replication_migration subnet: subnet site: site ~}}
+ {{~ allow_ups_access subnet: subnet site: site ~}}
+ {{~ allow_ups_broadcast_from_site_ups subnet: subnet site: site ~}}
+ {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
+        "172.16.71.0/24",
+        "172.16.73.0/24",
+        "172.20.1.0/24",
+        "172.20.43.0/24",
+        "172.20.64.0/24",
+        "172.20.71.0/24"
+      ]
+ ~}}
+!
 {{~ subnet = subnets.vlan20_67 ~}}
 ip access-list extended {{ subnet.acl_name }}
  {{~ allow_ad_dns_queries subnet: subnet ~}}

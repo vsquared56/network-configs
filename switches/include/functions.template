@@ -208,6 +208,8 @@ func allow_ad
       " remark Active Directory Clients to Domain Controllers\r\n"
       " permit udp " + $.subnet.cidr + " host " + dc + " eq dns\r\n"
       " remark Active Directory Clients to Domain Controllers\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + dc + " eq dns\r\n"
+      " remark Active Directory Clients to Domain Controllers\r\n"
       " permit tcp " + $.subnet.cidr + " host " + dc + " eq kerberos\r\n"
       " remark Active Directory Clients to Domain Controllers\r\n"
       " permit udp " + $.subnet.cidr + " host " + dc + " eq kerberos\r\n"
@@ -289,6 +291,60 @@ func allow_dns_from_site_dcs
     " permit udp host " + dc + " any eq dns\r\n"
     " remark Allow DNS queries from DNS servers\r\n"
     " permit tcp host " + dc + " any eq dns\r\n"
+  end
+end
+
+func allow_hyperv_to_management_subnets
+  for destination_subnet in subnets | object.values
+    if destination_subnet.is_management_subnet
+      " remark Allow HyperV Host to Management (see Management to Host)\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq loc-srv\r\n"
+      " remark Allow HyperV Host to Management (see Management to Host)\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 49152 65535\r\n"
+      " remark Allow IPMI reponses\r\n"
+      " permit udp " + $.subnet.cidr + " eq asf-rmcp " + destination_subnet.cidr + "\r\n"
+    end
+  end
+end
+
+func allow_hyperv_replication_migration
+  for destination_subnet in subnets | object.values
+    if destination_subnet.hyperv_replication_migration_access
+      " remark Hyper-V Live Migration\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 6600\r\n"
+      " remark Hyper-V Live Migration (SMB)\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq microsoft-ds\r\n"
+      " remark Hyper-V Live Migration (Dynamic)\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 49152 65535\r\n"
+      " remark Hyper-V Replica\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq http\r\n"
+      " remark Allow WinRM between Hyper-V Hosts\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 5985\r\n"
+      " remark Allow WinRM between Hyper-V Hosts\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 5986\r\n"
+      " remark Allow Windows Failover Cluster between Hyper-V Hosts\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 3343\r\n"
+      " remark Allow Windows Failover Cluster between Hyper-V Hosts\r\n"
+      " permit udp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 3343\r\n"
+    end
+  end
+end
+
+func allow_ups_access
+  for ups in all_eaton_ups[$.site.name]
+    " remark Eaton UPS Access\r\n"
+    " permit tcp " + $.subnet.cidr + " host " + ups + " eq http\r\n"
+    " remark Eaton UPS Connected Alarms\r\n"
+    " permit tcp " + $.subnet.cidr + " host " + ups + " eq 5000\r\n"
+  end
+end
+
+func allow_ups_broadcast_from_site_ups
+  for ups in all_eaton_ups[$.site.name]
+    " remark Eaton UPS Notification Broadcast\r\n"
+    " permit udp host " + ups + " " + $.subnet.cidr + " eq 4679\r\n"
+    " remark Eaton UPS Alarms Broadcast\r\n"
+    " permit udp host " + ups + " " + $.subnet.cidr + " eq 4680\r\n"
   end
 end
 
