@@ -26,6 +26,47 @@ ip access-list extended {{ subnet.acl_name }}
  ~}}
  {{~ allow_internet_access subnet: subnet ~}}
 !
+{{~ subnet = subnets.vlan20_43 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad subnet: subnet ~}}
+ {{~ allow_bulk_fileserver_access subnet: subnet ~}}
+ {{~ allow_service_http_access subnet: subnet ~}}
+ {{~ allow_development_subnet_access subnet: subnet ~}}
+ {{~ allow_windows_server_management subnet: subnet ~}}
+ {{~ allow_windows_client_management subnet: subnet ~}}
+ {{~ allow_linux_server_management subnet: subnet ~}}
+ {{~ allow_network_device_management subnet: subnet ~}}
+ {{~ allow_iis_management subnet: subnet ~}}
+ {{~ allow_mssql_management subnet: subnet ~}}
+ {{~ allow_hyperv_management subnet: subnet ~}}
+ {{~ allow_unifi_controller_access subnet: subnet ~}}
+ {{~ allow_uyuni_access subnet: subnet ~}}
+ {{~ allow_iot_access subnet: subnet ~}}
+ {{~ allow_blueiris_http_access subnet: subnet ~}}
+ {{~ allow_management_to_ipcam_subnet subnet: subnet ~}}
+ {{~ allow_urbackup_management subnet: subnet ~}}
+ {{~ allow_dhcp_requests subnet: subnet ~}}
+ {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
+        "172.16.1.0/24",
+        "172.16.43.0/24",
+        "172.16.49.0/24",
+        "172.16.51.0/24",
+        "172.16.55.0/24",
+        "172.16.64.0/24",
+        "172.20.1.0/24",
+        "172.20.43.0/24",
+        "172.20.49.0/24",
+        "172.20.51.0/24",
+        "172.20.55.0/24",
+        "172.20.64.0/24",
+        "172.20.67.0/24",
+        "172.20.80.0/24",
+        "172.20.100.0/24"
+      ]
+ ~}}
+!
 {{~ subnet = subnets.vlan20_49 ~}}
 ip access-list extended {{ subnet.acl_name }}
  {{~ allow_ad subnet: subnet ~}}

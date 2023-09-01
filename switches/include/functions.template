@@ -309,7 +309,7 @@ end
 
 func allow_hyperv_replication_migration
   for destination_subnet in subnets | object.values
-    if destination_subnet.hyperv_replication_migration_access
+    if destination_subnet.hyperv_subnet
       " remark Hyper-V Live Migration\r\n"
       " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 6600\r\n"
       " remark Hyper-V Live Migration (SMB)\r\n"
@@ -326,6 +326,149 @@ func allow_hyperv_replication_migration
       " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 3343\r\n"
       " remark Allow Windows Failover Cluster between Hyper-V Hosts\r\n"
       " permit udp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 3343\r\n"
+    end
+  end
+end
+
+func allow_windows_server_management
+  for destination_subnet in subnets | object.values
+    if destination_subnet.managed_windows_server_subnet
+      " remark Windows Server Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq loc-srv\r\n"
+      " remark Windows Server Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq microsoft-ds\r\n"
+      " remark Windows Server Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 3389\r\n"
+      " remark Windows Server Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 5985\r\n"
+      " remark Windows Server Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 5986\r\n"
+      " remark Windows Server Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 49152 65535\r\n"
+      " remark Windows Server Management\r\n"
+      " permit udp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 49152 65535\r\n"
+    end
+  end
+end
+
+func allow_windows_client_management
+  for destination_subnet in subnets | object.values
+    if destination_subnet.managed_windows_client_subnet
+      " remark Windows Client Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq loc-srv\r\n"
+      " remark Windows Client Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq microsoft-ds\r\n"
+      " remark Windows Client Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 3389\r\n"
+      " remark Windows Client Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 5985\r\n"
+      " remark Windows Client Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 5986\r\n"
+      " remark Windows Client Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 49152 65535\r\n"
+      " remark Windows Client Management\r\n"
+      " permit udp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 49152 65535\r\n"
+    end
+  end
+end
+
+func allow_linux_server_management
+  for destination_subnet in subnets | object.values
+    if destination_subnet.managed_linux_server_subnet
+      " remark Linux Server Management\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq ssh\r\n"
+    end
+  end
+end
+
+func allow_network_device_management
+  for site_hosts in all_network_devices | object.values
+    for host in site_hosts
+      " remark Network Device Management\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + host + " eq http\r\n"
+      " remark Network Device Management\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + host + " eq ssl\r\n"
+      " remark Network Device Management\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + host + " eq ssh\r\n"
+    end
+  end
+end
+
+func allow_iis_management
+  for site_servers in all_iis_servers | object.values
+    for server in site_servers
+      " remark IIS Management\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq 8172\r\n"
+    end
+  end
+end
+
+func allow_mssql_management
+  for site_servers in all_mssql_servers | object.values
+    for server in site_servers
+      " remark MSSQL Management\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq 1433\r\n"
+      " remark MSSQL Management\r\n"
+      " permit udp " + $.subnet.cidr + " host " + server + " eq 1434\r\n"
+    end
+  end
+end
+
+func allow_hyperv_management
+  for destination_subnet in subnets | object.values
+    if destination_subnet.hyperv_subnet
+      " remark Hyper-V management (mgmt to host, see host to management)\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 2179\r\n"
+      " remark Dell OMSA\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 1311\r\n"
+      " remark Dell IDRAC\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq ssl\r\n"
+      " remark Dell IDRAC\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 5900\r\n"
+      " remark IPMI for Hyper-V Hosts\r\n"
+      " permit udp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq asf-rmcp\r\n"
+      " remark Eaton IPP\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 4679 4680\r\n"
+    end
+  end
+end
+
+func allow_development_subnet_access
+  for destination_subnet in subnets | object.values
+    if destination_subnet.development_subnet
+      " remark Allow Dev Subnet Access\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 8080\r\n"
+    end
+  end
+end
+
+func allow_unifi_controller_access
+  for site_servers in all_unifi_controllers | object.values
+    for server in site_servers
+      " remark Unifi controller web admin access\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq 8443\r\n"
+    end
+  end
+end
+
+func allow_management_to_ipcam_subnet
+  for destination_subnet in subnets | object.values
+    if destination_subnet.ipcam_subnet
+      " remark IP Camera Configuration Access\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq http\r\n"
+      " remark IP Camera Configuration Access\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq ssl\r\n"
+    end
+  end
+end
+
+func allow_urbackup_management
+  for site_servers in all_urbackup_servers | object.values
+    for server in site_servers
+      " remark remark Urbackup admin access\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq http\r\n"
+      " remark remark Urbackup admin access\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq ssl\r\n"
     end
   end
 end

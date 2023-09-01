@@ -6,7 +6,12 @@
             gateway: "172.16.43.1",
             site: "site16",
             is_management_subnet: true,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: true,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -19,7 +24,12 @@
             gateway: "172.16.49.1",
             site: "site16",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: true,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -32,7 +42,12 @@
             gateway: "172.16.51.1",
             site: "site16",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: true,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -45,7 +60,12 @@
             gateway: "172.16.55.1",
             site: "site16",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: true,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -58,7 +78,12 @@
             gateway: "172.16.64.1",
             site: "site16",
             is_management_subnet: false,
-            hyperv_replication_migration_access: true,
+            managed_windows_server_subnet: true,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: true,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -71,7 +96,12 @@
             gateway: "172.16.71.1",
             site: "site16",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: true,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -84,25 +114,17 @@
             gateway: "172.16.73.1",
             site: "site16",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: true,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
             internal_urbackup_access: false,
             internal_uyuni_ssh_push_access: false
-        },
-        "vlan16_80" : {
-            acl_name: "acl_vlan80",
-            cidr: "172.16.80.0/24",
-            gateway: "172.16.80.1",
-            site: "site16",
-            is_management_subnet: false,
-            hyperv_replication_migration_access: false,
-            internal_dns_access: true,
-            internal_ad_access: true,
-            internal_radius_access: false,
-            internal_urbackup_access: false,
-            internal_uyuni_ssh_push_access: true
         },
         "vlan16_85" : {
             acl_name: "acl_vlan85",
@@ -110,20 +132,30 @@
             gateway: "172.16.85.1",
             site: "site16",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: false,
             internal_radius_access: true,
             internal_urbackup_access: false,
             internal_uyuni_ssh_push_access: false
         },
-        "vlan20_100" : {
-            acl_name: "acl_vlan100",
-            cidr: "172.20.100.0/24",
-            gateway: "172.20.100.1",
-            site: "site20",
+        "vlan16_180" : {
+            acl_name: "acl_vlan180",
+            cidr: "172.16.180.0/24",
+            gateway: "172.16.180.1",
+            site: "site16",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: true,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -136,7 +168,12 @@
             gateway: "172.20.43.1",
             site: "site20",
             is_management_subnet: true,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: true,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -149,7 +186,12 @@
             gateway: "172.20.49.1",
             site: "site20",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: true,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -162,7 +204,12 @@
             gateway: "172.20.51.1",
             site: "site20",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: true,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -175,7 +222,12 @@
             gateway: "172.20.55.1",
             site: "site20",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: true,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -188,7 +240,12 @@
             gateway: "172.20.64.1",
             site: "site20",
             is_management_subnet: false,
-            hyperv_replication_migration_access: true,
+            managed_windows_server_subnet: true,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: true,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -201,7 +258,12 @@
             gateway: "172.20.67.1",
             site: "site20",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: true,
             internal_dns_access: true,
             internal_ad_access: false,
             internal_radius_access: false,
@@ -214,7 +276,12 @@
             gateway: "172.20.71.1",
             site: "site20",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: true,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: true,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -227,7 +294,12 @@
             gateway: "172.20.80.1",
             site: "site20",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: true,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: true,
             internal_radius_access: false,
@@ -240,7 +312,12 @@
             gateway: "172.20.84.1",
             site: "site20",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: false,
             internal_radius_access: false,
@@ -253,7 +330,12 @@
             gateway: "172.20.85.1",
             site: "site20",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: true,
             internal_ad_access: false,
             internal_radius_access: true,
@@ -266,12 +348,35 @@
             gateway: "172.20.86.1",
             site: "site20",
             is_management_subnet: false,
-            hyperv_replication_migration_access: false,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
             internal_dns_access: false,
             internal_ad_access: false,
             internal_radius_access: false,
             internal_urbackup_access: false,
             internal_uyuni_ssh_push_access: false
+        },
+        "vlan20_100" : {
+            acl_name: "acl_vlan100",
+            cidr: "172.20.100.0/24",
+            gateway: "172.20.100.1",
+            site: "site20",
+            is_management_subnet: false,
+            managed_windows_server_subnet: true,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: true,
+            hyperv_subnet: false,
+            development_subnet: true,
+            ipcam_subnet: false,
+            internal_dns_access: true,
+            internal_ad_access: true,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: true
         }
     }
 
@@ -286,6 +391,22 @@ sites = {
             cidr: "172.20.0.0/16",
             firewall: resolve_a("capsicum.rvtn.net")
         }
+}
+
+all_network_devices = {
+    "site16" : [
+        resolve_a("citrus.rvtn.net"),
+        resolve_a("bell.rvtn.net"),
+        resolve_a("eaton9130-305.rvtn.org"),
+        resolve_a("4g16.rvtn.net")
+    ],
+    "site20" : [
+        resolve_a("capsicum.rvtn.net"),
+        resolve_a("brya.rvtn.net"),
+        resolve_a("eaton9130-rack.rvtn.org"),
+        resolve_a("edgar.ad.rvtn.org"),
+        "192.168.100.1" # Cable Modem
+    ]
 }
 
 all_dcs = {
@@ -354,6 +475,36 @@ all_utility_http_servers = {
     ]
 }
 
+all_service_http_servers = {
+    "site16" : [
+        resolve_a("psycwave.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("deavor.ad.rvtn.org")
+    ]
+}
+
+all_iis_servers = {
+    "site16" : [
+        resolve_a("metaman.ad.rvtn.org"),
+        resolve_a("stormicide.ad.rvtn.org"),
+        resolve_a("edna.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("blazestone.ad.rvtn.org"),
+        resolve_a("deavor.ad.rvtn.org")
+    ]
+}
+
+all_mssql_servers = {
+    "site16" : [
+        resolve_a("huph.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("sansweet.ad.rvtn.org")
+    ]
+}
+
 all_utility_github_access_servers = {
     "site16" : [
         resolve_a("metaman.ad.rvtn.org"),
@@ -364,12 +515,10 @@ all_utility_github_access_servers = {
     ]
 }
 
-all_service_http_servers = {
-    "site16" : [
-        resolve_a("psycwave.ad.rvtn.org")
-    ],
+all_unifi_controllers = {
+    "site16" : [],
     "site20" : [
-        resolve_a("deavor.ad.rvtn.org")
+        resolve_a("fironic.ad.rvtn.org")
     ]
 }
 
