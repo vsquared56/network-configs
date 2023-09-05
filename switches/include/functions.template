@@ -172,6 +172,13 @@ func allow_radius_requests
   end
 end
 
+func allow_ssh_to_ubiquiti_networks
+  " remark Ubiquiti AP ssh access\r\n"
+  " permit tcp " + $.subnet.cidr + " 172.20.85.0/24 eq ssh\r\n"
+  " remark Allow IOT Device Access\r\n"
+  " permit tcp " + $.subnet.cidr + " 172.16.85.0/24 eq ssh\r\n"
+end
+
 func allow_iot_access
   " remark Allow IOT Device Access\r\n"
   " permit tcp " + $.subnet.cidr + " 172.20.84.0/24 eq http\r\n"

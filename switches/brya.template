@@ -44,6 +44,7 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ allow_iot_access subnet: subnet ~}}
  {{~ allow_blueiris_http_access subnet: subnet ~}}
  {{~ allow_management_to_ipcam_subnet subnet: subnet ~}}
+ {{~ allow_ssh_to_ubiquiti_networks subnet: subnet ~}}
  {{~ allow_urbackup_management subnet: subnet ~}}
  {{~ allow_dhcp_requests subnet: subnet ~}}
  {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
