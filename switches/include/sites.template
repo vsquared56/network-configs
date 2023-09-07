@@ -8,7 +8,8 @@
         "site20" : {
             name: "site20",
             cidr: "172.20.0.0/16",
-            firewall: resolve_a("capsicum.rvtn.net")
+            firewall: resolve_a("capsicum.rvtn.net"),
+            ip_helper_adresses: ["172.20.71.99","172.20.71.254"]
         }
 }
 ~}}

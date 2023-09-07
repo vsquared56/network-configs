@@ -1,0 +1,29 @@
+{{~
+  func ve_interfaces
+    for subnet in subnets | object.values
+      if subnet.site == site.name
+        subnet_mask = (subnet.cidr | string.split '/' | array.last)
+
+        "interface ve " + subnet.vlan_number + "\r\n"
+
+        if subnet.acl_name
+          " ip access-group " + subnet.acl_name + " in\r\n"
+        end
+
+        if subnet.gateway
+          " ip address " + subnet.gateway + "/" + subnet_mask + "\r\n"
+        end
+
+        if subnet.include_ip_helpers_for_interface
+          helper_number = 1
+          for helper_address in site.ip_helper_adresses
+            " ip helper-address " + helper_number + " " + helper_address + "\r\n"
+            helper_number = helper_number + 1
+          end
+        end
+
+        "!\r\n"
+      end
+    end
+  end
+~}}

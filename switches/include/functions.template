@@ -207,6 +207,9 @@ end
 func allow_dhcp_requests
   " remark Allow DHCP Requests\r\n"
   " permit udp host 0.0.0.0 eq bootpc host 255.255.255.255 eq bootps\r\n"
+  if $.subnet.include_ip_helpers_for_interface == false
+    " ERROR -- DHCP requests are allowed, but no IP helpers are included on the interface"
+  end
 end
 
 func allow_ad

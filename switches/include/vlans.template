@@ -1,0 +1,26 @@
+{{~
+  func vlans
+    for subnet in subnets | object.values
+      if subnet.site == site.name
+        if subnet.vlan_name && (subnet.vlan_name | string.size) > 0
+          "vlan " + subnet.vlan_number + " name " + subnet.vlan_name + " by port\r\n"
+        else
+          "vlan " + subnet.vlan_number + " by port\r\n"
+        end
+
+        if subnet.tagged_ports
+          " tagged " + subnet.tagged_ports + "\r\n"
+        end
+
+        if subnet.untagged_ports
+          " untagged " + subnet.untagged_ports + "\r\n"
+        end
+
+        if subnet.gateway
+          " router-interface ve " + subnet.vlan_number + "\r\n"
+        end
+        "!\r\n"
+      end
+    end
+  end
+~}}
