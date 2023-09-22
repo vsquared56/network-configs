@@ -19,6 +19,12 @@ ip access-list extended {{ subnet.acl_name }}
  ~}}
  {{~ allow_internet_access subnet: subnet ~}}
 !
+{{~ subnet = subnets.vlan20_1087 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_dhcp_requests subnet: subnet ~}}
+ {{~ allow_local_icmp_to_gateway subnet: subnet ~}}
+ {{~ allow_internet_access subnet: subnet ~}}
+!
 {{~ subnet = subnets.vlan20_43 ~}}
 ip access-list extended {{ subnet.acl_name }}
  {{~ allow_ad subnet: subnet ~}}

@@ -528,6 +528,29 @@
             internal_radius_access: false,
             internal_urbackup_access: false,
             internal_uyuni_ssh_push_access: true
+        },
+        "vlan20_1087" : {
+            vlan_name: "GUEST",
+            acl_name: "acl_vlan1087",
+            vlan_number: 1087,
+            tagged_ports: "ethe 1/1/2",
+            untagged_ports: null,
+            cidr: "172.21.87.0/24",
+            gateway: "172.21.87.1",
+            site: "site20",
+            is_management_subnet: false,
+            include_ip_helpers_for_interface: true,
+            managed_windows_server_subnet: false,
+            managed_windows_client_subnet: false,
+            managed_linux_server_subnet: false,
+            hyperv_subnet: false,
+            development_subnet: false,
+            ipcam_subnet: false,
+            internal_dns_access: false,
+            internal_ad_access: false,
+            internal_radius_access: false,
+            internal_urbackup_access: false,
+            internal_uyuni_ssh_push_access: false
         }
     }
 ~}}
