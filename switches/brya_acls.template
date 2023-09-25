@@ -105,6 +105,8 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ allow_minecraft_access subnet: subnet ~}}
  {{~ allow_dhcp_requests subnet: subnet ~}}
  {{~ allow_urbackup_replies subnet: subnet ~}}
+ {{~ allow_connections_to_roon_core subnet: subnet ~}}
+ {{~ allow_connections_from_roon_core subnet: subnet ~}}
  {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
  {{~ allow_local_icmp_replies subnet: subnet ~}}
  {{~ allow_established_tcp_sessions subnet: subnet subnets: [
