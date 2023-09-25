@@ -178,6 +178,9 @@ all_blueiris_ips = {
 all_roon_core_ips = {
     "acl_vlan49" : {
         roon_core: "172.20.49.83"
+    },
+    "acl_vlan51" : {
+        roon_core: "172.20.51.83"
     }
 }
 
