@@ -1,0 +1,191 @@
+{{~
+all_network_devices = {
+    "site16" : [
+        resolve_a("citrus.rvtn.net"),
+        resolve_a("bell.rvtn.net"),
+        resolve_a("eaton9130-305.rvtn.org"),
+        resolve_a("4g16.rvtn.net")
+    ],
+    "site20" : [
+        resolve_a("capsicum.rvtn.net"),
+        resolve_a("brya.rvtn.net"),
+        resolve_a("eaton9130-rack.rvtn.org"),
+        resolve_a("edgar.ad.rvtn.org"),
+        "192.168.100.1" # Cable Modem
+    ]
+}
+
+all_dcs = {
+    "site16" : [
+        resolve_a("gazerbeam.ad.rvtn.org"),
+        resolve_a("phylange.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("apogee.ad.rvtn.org"),
+        resolve_a("gammajack.ad.rvtn.org")
+    ]
+}
+
+all_dhcp_servers = {
+    "site16" : [
+        resolve_a("dynaguy.ad.rvtn.org"),
+        resolve_a("thunderhead.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("splashdown.ad.rvtn.org"),
+        resolve_a("stratogale.ad.rvtn.org")
+    ]
+}
+
+all_adcs_cas = {
+    "site16" : [
+        resolve_a("rvtn-prime-ie1.ad.rvtn.org")
+    ],
+    "site20" : []
+}
+
+all_wsus_servers = {
+    "site16" : [
+        resolve_a("edna.ad.rvtn.org")
+    ],
+    "site20" : []
+}
+
+all_metastorm_file_servers = {
+    "site16" : [
+        resolve_a("metaman.ad.rvtn.org"),
+        resolve_a("stormicide.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("blazestone.ad.rvtn.org"),
+        resolve_a("blitzerman.ad.rvtn.org")
+    ]
+}
+
+all_bulk_file_servers = {
+    "site16" : [
+        resolve_a("downburst.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("macroburst.ad.rvtn.org")
+    ]
+}
+
+all_utility_http_servers = {
+    "site16" : [
+        resolve_a("metaman.ad.rvtn.org"),
+        resolve_a("stormicide.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("blazestone.ad.rvtn.org")
+    ]
+}
+
+all_service_http_servers = {
+    "site16" : [
+        resolve_a("psycwave.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("deavor.ad.rvtn.org")
+    ]
+}
+
+all_iis_servers = {
+    "site16" : [
+        resolve_a("metaman.ad.rvtn.org"),
+        resolve_a("stormicide.ad.rvtn.org"),
+        resolve_a("edna.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("blazestone.ad.rvtn.org"),
+        resolve_a("deavor.ad.rvtn.org")
+    ]
+}
+
+all_mssql_servers = {
+    "site16" : [
+        resolve_a("huph.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("sansweet.ad.rvtn.org")
+    ]
+}
+
+all_utility_github_access_servers = {
+    "site16" : [
+        resolve_a("metaman.ad.rvtn.org"),
+        resolve_a("stormicide.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("blazestone.ad.rvtn.org")
+    ]
+}
+
+all_unifi_controllers = {
+    "site16" : [],
+    "site20" : [
+        resolve_a("fironic.ad.rvtn.org")
+    ]
+}
+
+all_radius_servers = {
+    "site16" : [
+        resolve_a("hypershock.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("plasmabolt.ad.rvtn.org")
+    ]
+}
+
+all_uyuni_servers = {
+    "site16" : [],
+    "site20" : [
+        resolve_a("dicker.ad.rvtn.org")
+    ]
+}
+
+all_blueiris_servers = {
+    "site16" : [],
+    "site20" : [
+        resolve_a("everseer.ad.rvtn.org")
+    ]
+}
+
+all_urbackup_servers = {
+    "site16" : [
+        resolve_a("frozone-16.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("frozone-20.ad.rvtn.org")
+    ]
+}
+
+all_eaton_ups = {
+    "site16" : [
+        resolve_a("eaton9130-305.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("eaton9130-rack.rvtn.org")
+    ]
+}
+
+all_blueiris_ips = {
+    "acl_vlan67" : {
+        blue_iris: "172.20.67.69"
+    }
+}
+
+all_roon_core_ips = {
+    "acl_vlan49" : {
+        roon_core: "172.20.49.83"
+    }
+}
+
+all_github_subnets = [
+    "192.30.252.0/22",
+    "185.199.108.0/22",
+    "140.82.112.0/20",
+    "143.55.64.0/20"
+]
+
+~}}
