@@ -190,6 +190,8 @@ ip access-list extended {{ subnet.acl_name }}
  permit tcp host {{resolve_a("dicker.ad.rvtn.org")}} host {{resolve_a("capsicum.rvtn.net")}} eq 8080
  remark Allow Web Proxy Access (reflux)
  permit tcp host {{resolve_a("reflux.ad.rvtn.org")}} host {{resolve_a("capsicum.rvtn.net")}} eq 8080
+ remark Allow SMB access from squeker to local bulk file server
+ permit tcp host {{resolve_a("squeaker.ad.rvtn.org")}} host {{resolve_a("macroburst.ad.rvtn.org")}} eq microsoft-ds
  {{~ allow_urbackup_replies subnet: subnet ~}}
  {{~ allow_dhcp_replies_from_site_dhcp site: site ~}}
  {{~ allow_radius_replies_from_site_radius_servers site: site ~}}
