@@ -39,7 +39,8 @@ all_dhcp_servers = {
 
 all_adcs_cas = {
     "site16" : [
-        resolve_a("rvtn-prime-ie1.ad.rvtn.org")
+        resolve_a("rvtn-prime-ie1.ad.rvtn.org"),
+        resolve_a("rvtn-prime-ie2.ad.rvtn.org")
     ],
     "site20" : []
 }
