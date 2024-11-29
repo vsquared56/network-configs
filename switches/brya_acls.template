@@ -190,6 +190,10 @@ ip access-list extended {{ subnet.acl_name }}
  permit tcp host {{resolve_a("dicker.ad.rvtn.org")}} host {{resolve_a("capsicum.rvtn.net")}} eq 8080
  remark Allow Web Proxy Access (reflux)
  permit tcp host {{resolve_a("reflux.ad.rvtn.org")}} host {{resolve_a("capsicum.rvtn.net")}} eq 8080
+ remark Allow WSUS Web Proxy Access (edna)
+ permit tcp host {{resolve_a("edna.ad.rvtn.org")}} host {{resolve_a("capsicum.rvtn.net")}} eq 8080
+ remark Allow WSUS access to SQL (edna to sansweet)
+ permit tcp host {{resolve_a("edna.ad.rvtn.org")}} host {{resolve_a("sansweet.ad.rvtn.org")}} eq 1433
  {{~ allow_urbackup_replies subnet: subnet ~}}
  {{~ allow_dhcp_replies_from_site_dhcp site: site ~}}
  {{~ allow_radius_replies_from_site_radius_servers site: site ~}}
