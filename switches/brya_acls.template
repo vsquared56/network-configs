@@ -212,8 +212,29 @@ ip access-list extended {{ subnet.acl_name }}
       "172.20.64.0/24",
       "172.20.67.0/24",
       "172.20.71.0/24",
+      "172.20.75.0/24",
       "172.20.80.0/24",
       "172.20.100.0/24"
+    ]
+ ~}}
+!
+{{~ subnet = subnets.vlan20_75 ~}}
+ip access-list extended {{ subnet.acl_name }}
+ {{~ allow_ad subnet: subnet ~}}
+ {{~ allow_bulk_fileserver_access subnet: subnet ~}}
+ {{~ allow_service_http_access subnet: subnet ~}}
+ {{~ allow_uyuni_access subnet: subnet ~}}
+ {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
+ {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_established_tcp_sessions subnet: subnet subnets: [
+      "172.16.43.0/24",
+      "172.16.49.0/24",
+      "172.16.51.0/24",
+      "172.16.71.0/24",
+      "172.20.43.0/24",
+      "172.20.49.0/24",
+      "172.20.51.0/24",
+      "172.20.71.0/24"
     ]
  ~}}
 !
