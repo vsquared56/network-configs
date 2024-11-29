@@ -46,10 +46,10 @@ all_adcs_cas = {
 }
 
 all_wsus_servers = {
-    "site16" : [
+    "site16" : [],
+    "site20" : [
         resolve_a("edna.ad.rvtn.org")
-    ],
-    "site20" : []
+    ]
 }
 
 all_metastorm_file_servers = {
