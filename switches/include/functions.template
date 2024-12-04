@@ -281,7 +281,7 @@ func allow_ad
 end
 
 func allow_windows_failover_cluster_replies
-  for server in all_hyperv_hosts[$.site.name]
+  for server in all_wsfc_endpoints[$.site.name]
     for subnet in subnets | object.values
       if subnet.is_management_subnet
         " remark Windows Failover Cluster UDP replies (cluster service)\r\n"
