@@ -374,6 +374,8 @@ func allow_windows_server_management
       " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 49152 65535\r\n"
       " remark Windows Server Management\r\n"
       " permit udp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 49152 65535\r\n"
+      " remark Windows Server Management\r\n"
+      " permit icmp " + $.subnet.cidr + " " + destination_subnet.cidr + " echo\r\n"
     end
   end
 end
