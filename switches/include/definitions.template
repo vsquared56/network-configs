@@ -63,6 +63,17 @@ all_metastorm_file_servers = {
     ]
 }
 
+all_hyperv_hosts = {
+    "site16" : [
+        resolve_a("alec.ad.rvtn.org"),
+        resolve_a("pete.ad.rvtn.org")
+    ],
+    "site20" : [
+        resolve_a("molly.ad.rvtn.org"),
+        resolve_a("pierre.ad.rvtn.org")
+    ]
+}
+
 all_bulk_file_servers = {
     "site16" : [
         resolve_a("downburst.ad.rvtn.org")
