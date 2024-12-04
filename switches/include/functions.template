@@ -280,6 +280,19 @@ func allow_ad
   allow_utility_http_access subnet: $.subnet
 end
 
+func allow_windows_failover_cluster_replies
+  for server in all_wsfc_endpoints[$.site.name]
+    for subnet in subnets | object.values
+      if subnet.is_management_subnet
+        " remark Windows Failover Cluster UDP replies (cluster service)\r\n"
+        " permit udp host " + server + " eq 3343 " + subnet.cidr + "\r\n"
+        " remark Windows Failover Cluster UDP replies (cluster administrator)\r\n"
+        " permit udp host " + server + " eq 137 " + subnet.cidr + "\r\n"
+      end
+    end
+  end
+end
+
 func allow_urbackup_replies
   " remark URbackup UDP replies (discovery)\r\n"
   " permit udp " + $.subnet.cidr + " eq 35622 host " + resolve_a("frozone-20.ad.rvtn.org") + "\r\n"
@@ -361,6 +374,8 @@ func allow_windows_server_management
       " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 49152 65535\r\n"
       " remark Windows Server Management\r\n"
       " permit udp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 49152 65535\r\n"
+      " remark Windows Server Management\r\n"
+      " permit icmp " + $.subnet.cidr + " " + destination_subnet.cidr + " echo\r\n"
     end
   end
 end
@@ -433,6 +448,20 @@ func allow_hyperv_management
     if destination_subnet.hyperv_subnet
       " remark Hyper-V management (mgmt to host, see host to management)\r\n"
       " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 2179\r\n"
+      " remark Windows Failover Cluster (cluster service)\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 3343\r\n"
+      " remark Windows Failover Cluster (cluster service)\r\n"
+      " permit udp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 3343\r\n"
+      " remark Windows Failover Cluster (cluster service)\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 445\r\n"
+      " remark Windows Failover Cluster (RPC)\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 135\r\n"
+      " remark Windows Failover Cluster (cluster service)\r\n"
+      " permit udp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 137\r\n"
+      " remark Windows Failover Cluster (RPC/DCOM)\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " range 49152 65535\r\n"
+      " remark Windows Failover Cluster (WinRM)\r\n"
+      " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 5985\r\n"
       " remark Dell OMSA\r\n"
       " permit tcp " + $.subnet.cidr + " " + destination_subnet.cidr + " eq 1311\r\n"
       " remark Dell IDRAC\r\n"

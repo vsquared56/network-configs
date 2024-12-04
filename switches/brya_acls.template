@@ -139,6 +139,7 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ allow_urbackup_replies subnet: subnet ~}}
  {{~ allow_hyperv_to_management_subnets subnet: subnet ~}}
  {{~ allow_hyperv_replication_migration subnet: subnet site: site ~}}
+ {{~ allow_windows_failover_cluster_replies subnet: subnet site: site ~}}
  {{~ allow_ups_access subnet: subnet site: site ~}}
  {{~ allow_ups_broadcast_from_site_ups subnet: subnet site: site ~}}
  {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
