@@ -221,6 +221,9 @@ ip access-list extended {{ subnet.acl_name }}
       "172.20.100.0/24"
     ]
  ~}}
+ {{~ deny_other_local_access ~}}
+ remark Allow Internet access for dicker (Uyuni)
+ permit ip host {{resolve_a("dicker.ad.rvtn.org")}} any
 !
 {{~ subnet = subnets.vlan20_80 ~}}
 ip access-list extended {{ subnet.acl_name }}
