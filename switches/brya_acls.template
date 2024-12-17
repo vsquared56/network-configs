@@ -5,6 +5,7 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ allow_service_http_access subnet: subnet ~}}
  {{~ allow_uyuni_access subnet: subnet ~}}
  {{~ allow_dev_network_access subnet: subnet ~}}
+ {{~ allow_kubernetes_workload_access subnet: subnet ~}}
  {{~ allow_urbackup_replies subnet: subnet ~}}
  {{~ allow_local_icmp_to_gateway subnet: subnet ~}}
  {{~ allow_local_icmp_replies subnet: subnet ~}}
@@ -46,6 +47,7 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ allow_rancher_dashboard_access subnet: subnet ~}}
  {{~ allow_iot_access subnet: subnet ~}}
  {{~ allow_dev_network_access subnet: subnet ~}}
+ {{~ allow_kubernetes_workload_access subnet: subnet ~}}
  {{~ allow_blueiris_http_access subnet: subnet ~}}
  {{~ allow_management_to_ipcam_subnet subnet: subnet ~}}
  {{~ allow_ssh_to_ubiquiti_networks subnet: subnet ~}}
@@ -80,6 +82,7 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ allow_rdp_to_management_network subnet: subnet ~}}
  {{~ allow_iot_access subnet: subnet ~}}
  {{~ allow_dev_network_access subnet: subnet ~}}
+ {{~ allow_kubernetes_workload_access subnet: subnet ~}}
  {{~ allow_blueiris_http_access subnet: subnet ~}}
  {{~ allow_minecraft_access subnet: subnet ~}}
  {{~ allow_dhcp_requests subnet: subnet ~}}
@@ -106,6 +109,7 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ allow_rdp_to_management_network subnet: subnet ~}}
  {{~ allow_iot_access subnet: subnet ~}}
  {{~ allow_dev_network_access subnet: subnet ~}}
+ {{~ allow_kubernetes_workload_access subnet: subnet ~}}
  {{~ allow_blueiris_http_access subnet: subnet ~}}
  {{~ allow_minecraft_access subnet: subnet ~}}
  {{~ allow_dhcp_requests subnet: subnet ~}}
