@@ -10,6 +10,8 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ allow_local_icmp_replies subnet: subnet ~}}
  {{~ allow_established_tcp_sessions subnet: subnet subnets: [
         "172.16.43.0/24",
+        "172.16.49.0/24",
+        "172.16.51.0/24",
         "172.20.1.0/24",
         "172.20.43.0/24",
         "172.20.49.0/24",
