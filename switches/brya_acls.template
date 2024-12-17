@@ -228,6 +228,8 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ deny_other_local_access ~}}
  remark Allow Internet access for dicker (Uyuni)
  permit ip host {{resolve_a("dicker.ad.rvtn.org")}} any
+ remark Allow Internet access for syndrome (Rancher)
+ permit ip host {{resolve_a("syndrome.ad.rvtn.org")}} any
 !
 {{~ subnet = subnets.vlan20_80 ~}}
 ip access-list extended {{ subnet.acl_name }}
