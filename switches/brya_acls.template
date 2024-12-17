@@ -243,6 +243,7 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ allow_bulk_fileserver_access subnet: subnet ~}}
  {{~ allow_service_http_access subnet: subnet ~}}
  {{~ allow_uyuni_access subnet: subnet ~}}
+ {{~ allow_rancher_dashboard_access subnet: subnet ~}}
  {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
  {{~ allow_local_icmp_replies subnet: subnet ~}}
  {{~ allow_all_local_subnet_traffic subnet: subnet ~}}
