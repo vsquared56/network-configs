@@ -241,6 +241,7 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ allow_uyuni_access subnet: subnet ~}}
  {{~ allow_local_icmp_to_subnet subnet: subnet ~}}
  {{~ allow_local_icmp_replies subnet: subnet ~}}
+ {{~ allow_all_local_subnet_traffic subnet: subnet ~}}
  {{~ allow_established_tcp_sessions subnet: subnet subnets: [
       "172.16.43.0/24",
       "172.16.49.0/24",

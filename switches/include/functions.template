@@ -35,6 +35,11 @@ func allow_local_icmp_replies
     " permit icmp " + $.subnet.cidr + " 172.20.0.0/16 echo-reply\r\n"
 end
 
+func allow_all_local_subnet_traffic
+    " remark Allow all local subnet traffic\r\n"
+    " permit ip " + $.subnet.cidr + " " + $.subnet.cidr + "\r\n"
+end
+
 func allow_ad_dns_queries
   for site_dcs in all_dcs | object.values
     for dc in site_dcs
