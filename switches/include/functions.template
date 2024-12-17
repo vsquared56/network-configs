@@ -144,6 +144,17 @@ func allow_uyuni_access
   end
 end
 
+func allow_rancher_dashboard_access
+  for site_servers in all_rancher_servers | object.values
+    for server in site_servers
+      " remark Allow HTTP access to Rancher dashboard\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq http\r\n"
+      " remark Allow HTTPS access to Rancher dashboard\r\n"
+      " permit tcp " + $.subnet.cidr + " host " + server + " eq ssl\r\n"
+    end
+  end
+end
+
 func allow_rdp_to_management_network
   " remark Allow RDP to Management Subnet\r\n"
   " permit tcp " + $.subnet.cidr + " 172.16.43.0/24 eq 3389\r\n"

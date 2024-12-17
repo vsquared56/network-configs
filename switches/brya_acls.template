@@ -43,6 +43,7 @@ ip access-list extended {{ subnet.acl_name }}
  {{~ allow_hyperv_management subnet: subnet ~}}
  {{~ allow_unifi_controller_access subnet: subnet ~}}
  {{~ allow_uyuni_access subnet: subnet ~}}
+ {{~ allow_rancher_dashboard_access subnet: subnet ~}}
  {{~ allow_iot_access subnet: subnet ~}}
  {{~ allow_dev_network_access subnet: subnet ~}}
  {{~ allow_blueiris_http_access subnet: subnet ~}}

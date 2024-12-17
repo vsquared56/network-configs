@@ -157,6 +157,13 @@ all_uyuni_servers = {
     ]
 }
 
+all_rancher_servers = {
+    "site16" : [],
+    "site20" : [
+        resolve_a("syndrome.ad.rvtn.org")
+    ]
+}
+
 all_blueiris_servers = {
     "site16" : [],
     "site20" : [
