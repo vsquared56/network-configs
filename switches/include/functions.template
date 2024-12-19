@@ -312,7 +312,7 @@ func allow_windows_failover_cluster_replies
         " remark Windows Failover Cluster UDP replies (cluster service)\r\n"
         " permit udp host " + server + " eq 3343 " + subnet.cidr + "\r\n"
         " remark Windows Failover Cluster UDP replies (cluster administrator)\r\n"
-        " permit udp host " + server + " eq 137 " + subnet.cidr + "\r\n"
+        " permit udp host " + server + " eq netbios-ns " + subnet.cidr + "\r\n"
       end
     end
   end
